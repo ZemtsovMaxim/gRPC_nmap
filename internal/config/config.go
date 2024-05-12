@@ -8,12 +8,12 @@ import (
 )
 
 type Config struct {
-	Address  int    `yaml:"server_address" env-default:"8080"`
-	LogLevel string `yaml:"log_level" env-default:"info" `
+	Addres   string `yaml:"address"`
+	LogLevel string `yaml:"log_level" env-default:"info"`
 }
 
 func MustLoad() *Config {
-	path := fetchConfigPatg()
+	path := fetchConfigPath()
 	if path == "" {
 		panic("config path is empty")
 	}
@@ -31,7 +31,7 @@ func MustLoad() *Config {
 	return &cfg
 }
 
-func fetchConfigPatg() string {
+func fetchConfigPath() string {
 	var res string
 
 	// --config="path/to/config.yaml"

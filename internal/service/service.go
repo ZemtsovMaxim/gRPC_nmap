@@ -3,20 +3,30 @@ package service
 import (
 	"context"
 	"log"
+	"os/exec"
+	"strconv"
 
-	"github.com/ZemtsovMaxim/gRPC_TestTask/api/netvuln"
+	"github.com/ZemtsovMaxim/gRPC_TestTask/pkg/api"
 )
 
-// NetVulnService реализует интерфейс NetVulnServiceServer из файла протокола.
 type NetVulnService struct{}
 
-// CheckVuln реализует метод CheckVuln в вашем gRPC-сервисе.
-func (s *NetVulnService) CheckVuln(ctx context.Context, req *netvuln.CheckVulnRequest) (*netvuln.CheckVulnResponse, error) {
+func (s *NetVulnService) CheckVuln(ctx context.Context, req *api.CheckVulnRequest) (*api.CheckVulnResponse, error) {
 	// Ваша логика проверки уязвимостей на основе полученного запроса.
 	log.Printf("Получен запрос на проверку уязвимостей: %v", req)
 
-	// Ваша логика вызова сканирования уязвимостей и обработки результатов.
+	cmdArgs := append([]string{"--script=vulners.nse", "-p", strconv.Itoa(int(req.TcpPort))}, req.Targets...)
+
+	cmd := exec.Command("nmap", cmdArgs...)
+	output, err := cmd.CombinedOutput()
+	if err != nil {
+		log.Printf("Ошибка при выполнении сканирования: %v", err)
+		return nil, err
+	}
+
+	// Пример обработки вывода команды, можно присвоить результатам каким-либо полям в структуре ответа
+	log.Printf("Результат сканирования: %s", string(output))
 
 	// Возвращаем фиктивный ответ в качестве примера.
-	return &netvuln.CheckVulnResponse{}, nil
+	return &api.CheckVulnResponse{}, nil
 }

@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.2.0
 // - protoc             v5.26.1
-// source: netvuln.v1/netvuln.proto
+// source: netvuln/netvuln.proto
 
 package api
 
@@ -43,21 +43,19 @@ func (c *netVulnServiceClient) CheckVuln(ctx context.Context, in *CheckVulnReque
 }
 
 // NetVulnServiceServer is the server API for NetVulnService service.
-// All implementations must embed UnimplementedNetVulnServiceServer
+// All implementations should embed UnimplementedNetVulnServiceServer
 // for forward compatibility
 type NetVulnServiceServer interface {
 	CheckVuln(context.Context, *CheckVulnRequest) (*CheckVulnResponse, error)
-	mustEmbedUnimplementedNetVulnServiceServer()
 }
 
-// UnimplementedNetVulnServiceServer must be embedded to have forward compatible implementations.
+// UnimplementedNetVulnServiceServer should be embedded to have forward compatible implementations.
 type UnimplementedNetVulnServiceServer struct {
 }
 
 func (UnimplementedNetVulnServiceServer) CheckVuln(context.Context, *CheckVulnRequest) (*CheckVulnResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CheckVuln not implemented")
 }
-func (UnimplementedNetVulnServiceServer) mustEmbedUnimplementedNetVulnServiceServer() {}
 
 // UnsafeNetVulnServiceServer may be embedded to opt out of forward compatibility for this service.
 // Use of this interface is not recommended, as added methods to NetVulnServiceServer will
@@ -101,5 +99,5 @@ var NetVulnService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "netvuln.v1/netvuln.proto",
+	Metadata: "netvuln/netvuln.proto",
 }

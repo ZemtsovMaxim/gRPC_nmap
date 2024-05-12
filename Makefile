@@ -10,4 +10,4 @@ test:
 	go test -v ./...
 
 generate:
-	protoc -I api api/netvuln/v1/netvuln.proto --go_out=./pkg --go-grpc_out=./pkg   
+	protoc -I api api/netvuln/v1/netvuln.proto --go_out=./pkg --go-grpc_out=./pkg --go-grpc_opt=require_unimplemented_servers=false  
