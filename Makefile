@@ -1,4 +1,4 @@
-.PHONY: build lint test
+.PHONY: build lint test generate
 
 build:
 	go build -o netvuln-service main.go

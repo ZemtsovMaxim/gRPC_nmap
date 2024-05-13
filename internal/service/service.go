@@ -28,12 +28,13 @@ func (s *NetVulnService) CheckVuln(ctx context.Context, req *api.CheckVulnReques
 	cmd := exec.Command("nmap", cmdArgs...)
 	output, err := cmd.CombinedOutput()
 	if err != nil {
-		s.Logger.Error("Ошибка при выполнении сканирования: %v", err)
+		s.Logger.Error("Ошибка при выполнении сканирования:", err)
 		return nil, err
 	}
 
 	// Пример обработки вывода команды, можно присвоить результатам каким-либо полям в структуре ответа
-	s.Logger.Info("Результат сканирования:" + string(output))
+	s.Logger.Info("Результат сканирования:")
+	s.Logger.Info(string(output))
 
 	// Возвращаем фиктивный ответ в качестве примера.
 	return &api.CheckVulnResponse{}, nil
