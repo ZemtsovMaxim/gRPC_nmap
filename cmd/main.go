@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log/slog"
 	"net"
 	"os"
@@ -34,14 +35,14 @@ func startServer(cfg *config.Config, log *slog.Logger) {
 
 	listener, err := net.Listen("tcp", cfg.Addres)
 	if err != nil {
-		log.Error("Ошибка при создании TCP-соединения:", err)
+		log.Error(fmt.Sprintf("Ошибка при создании TCP-соединения %v", err))
 		os.Exit(1)
 	}
 
 	log.Info("server listening", slog.Any("address", cfg.Addres))
 
 	if err := server.Serve(listener); err != nil {
-		log.Error("Ошибка при запуске сервера", err)
+		log.Error(fmt.Sprintf("Ошибка при запуске сервера %v", err))
 		os.Exit(1)
 	}
 }

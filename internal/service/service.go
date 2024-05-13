@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"fmt"
 	"log/slog"
 	"os/exec"
 	"strconv"
@@ -28,7 +29,7 @@ func (s *NetVulnService) CheckVuln(ctx context.Context, req *api.CheckVulnReques
 	cmd := exec.Command("nmap", cmdArgs...)
 	output, err := cmd.CombinedOutput()
 	if err != nil {
-		s.Logger.Error("Ошибка при выполнении сканирования:", err)
+		s.Logger.Error(fmt.Sprintf("Ошибка при выполнении сканирования: %v", err))
 		return nil, err
 	}
 
