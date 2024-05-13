@@ -11,7 +11,7 @@ import (
 )
 
 type NetVulnService struct {
-	Logger *slog.Logger // Добавляем поле для логгера
+	Logger *slog.Logger
 }
 
 // Конструктор для NetVulnService
@@ -33,10 +33,8 @@ func (s *NetVulnService) CheckVuln(ctx context.Context, req *api.CheckVulnReques
 		return nil, err
 	}
 
-	// Пример обработки вывода команды, можно присвоить результатам каким-либо полям в структуре ответа
 	s.Logger.Info("Результат сканирования:")
 	s.Logger.Info(string(output))
 
-	// Возвращаем фиктивный ответ в качестве примера.
 	return &api.CheckVulnResponse{}, nil
 }

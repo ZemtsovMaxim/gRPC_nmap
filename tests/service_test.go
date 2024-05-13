@@ -10,7 +10,7 @@ import (
 	"github.com/ZemtsovMaxim/gRPC_TestTask/pkg/api"
 )
 
-func TestNetVulnService_CheckVuln_Success(t *testing.T) {
+func TestNetVulnServiceCheckVulnSuccess(t *testing.T) {
 	logger := setupLogger()
 	srv := service.NewNetVulnService(logger)
 
@@ -29,7 +29,7 @@ func TestNetVulnService_CheckVuln_Success(t *testing.T) {
 	}
 }
 
-func TestNetVulnService_CheckVuln_Failure(t *testing.T) {
+func TestNetVulnServiceCheckVulnFailure(t *testing.T) {
 
 	logger := setupLogger()
 	srv := service.NewNetVulnService(logger)

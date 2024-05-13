@@ -16,6 +16,7 @@ import (
 func main() {
 
 	cfg := config.MustLoad()
+
 	log := logger.SetUpLogger(cfg.LogLevel)
 
 	log.Info("starting application", slog.Any("config", cfg))
