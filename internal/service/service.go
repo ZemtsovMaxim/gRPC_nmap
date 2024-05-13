@@ -12,7 +12,7 @@ import (
 type NetVulnService struct{}
 
 func (s *NetVulnService) CheckVuln(ctx context.Context, req *api.CheckVulnRequest) (*api.CheckVulnResponse, error) {
-	// Ваша логика проверки уязвимостей на основе полученного запроса.
+
 	log.Printf("Получен запрос на проверку уязвимостей: %v", req)
 
 	cmdArgs := append([]string{"--script=vulners.nse", "-p", strconv.Itoa(int(req.TcpPort))}, req.Targets...)

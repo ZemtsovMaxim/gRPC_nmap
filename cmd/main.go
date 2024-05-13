@@ -13,35 +13,35 @@ import (
 )
 
 func main() {
+
 	cfg := config.MustLoad()
 
 	fmt.Println(cfg)
 
-	log := setUpLogger(cfg.LogLevel)
+	log := logger.setUpLogger(cfg.LogLevel)
 
 	log.Info("starting application", slog.Any("config", cfg))
 
-	// Создаем новый gRPC сервер
 	server := grpc.NewServer()
 
-	// Регистрируем ваш сервис на сервере
-	api.RegisterNetVulnServiceServer(server, &service.NetVulnService{})
+	srv := &service.NetVulnService{}
 
-	// Создаем TCP-прослушиватель на указанном адресе и порте
+	api.RegisterNetVulnServiceServer(server, srv)
+
 	listener, err := net.Listen("tcp", cfg.Addres)
 	if err != nil {
-		log.Info("Ошибка при создании TCP-соединения: %v", err)
+		log.Error("Ошибка при создании TCP-соединения: %v", err)
 	}
 
 	log.Info("server listening", slog.Any("address", cfg.Addres))
 
-	// Запускаем сервер и начинаем обслуживание запросов
 	if err := server.Serve(listener); err != nil {
-		log.Info("Ошибка при запуске сервера: %v", err)
+		log.Error("Ошибка при запуске сервера: %v", err)
 	}
 
 }
 
+// Функция для логгера
 func setUpLogger(env string) *slog.Logger {
 	var log *slog.Logger
 
@@ -53,15 +53,15 @@ func setUpLogger(env string) *slog.Logger {
 		)
 	case "debug":
 		log = slog.New(
-			slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelDebug}),
+			slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelDebug, AddSource: true}),
 		)
 	case "error":
 		log = slog.New(
-			slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelError}),
+			slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelError, AddSource: true}),
 		)
 	case "warn":
 		log = slog.New(
-			slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelWarn}),
+			slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelWarn, AddSource: true}),
 		)
 	}
 
