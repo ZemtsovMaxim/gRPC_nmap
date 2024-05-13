@@ -5,7 +5,6 @@ import (
 	"os"
 )
 
-// Функция для настройки логгера
 func SetUpLogger(env string) *slog.Logger {
 	var log *slog.Logger
 
