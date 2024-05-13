@@ -36,5 +36,5 @@ func (s *NetVulnService) CheckVuln(ctx context.Context, req *api.CheckVulnReques
 	s.Logger.Info("Результат сканирования:")
 	s.Logger.Info(string(output))
 
-	return &api.CheckVulnResponse{}, nil
+	return &api.CheckVulnResponse{}, err
 }
