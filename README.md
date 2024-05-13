@@ -8,18 +8,19 @@
 
 1. Клонируйте репозиторий на локальную машину:
 
-```git clone https://github.com/your-username/gRPC_TestTask.git```
+    ```git clone https://github.com/your-username/gRPC_TestTask.git```
 
 2. Перейдите в каталог проекта:
-```cd gRPC_TestTask```
+
+    ```cd gRPC_TestTask```
 
 3. Установите зависимости:
 
-```go mod tidy```
+    ```go mod tidy```
 
 4. Установите nmap (если еще не установлен):
 
-```sudo apt-get update && sudo apt-get install -y nmap```
+    ```sudo apt-get update && sudo apt-get install -y nmap```
 
 ## Использование
 
@@ -29,7 +30,7 @@
 
 2. Запустите сервер:
 
-``` go run cmd/main.go --config=./config/config.yaml```
+    ```go run cmd/main.go --config=./config/config.yaml```
 
 3. После запуска сервера он будет готов к принятию запросов gRPC.
 
@@ -39,12 +40,12 @@
 
 ### Тестирование
 
-```make test```
+    ```make test```
 
 ### Запуск линтера
 
-```make lint```
+    ```make lint```
 
 ### Генерация proto файлов
 
-```make generate```
+    ```make generate```
