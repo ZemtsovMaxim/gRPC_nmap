@@ -8,7 +8,7 @@
 
 1. Клонируйте репозиторий на локальную машину:
 
-    ```git clone https://github.com/your-username/gRPC_TestTask.git```
+    ```git clone https://github.com/ZemtsovMaxim/gRPC_TestTask.git```
 
 2. Перейдите в каталог проекта:
 
@@ -20,7 +20,17 @@
 
 4. Установите nmap (если еще не установлен):
 
+    Linux:
+
     ```sudo apt-get update && sudo apt-get install -y nmap```
+
+    Windows:
+
+    Скачайте и установите с [официального сайта] (https://nmap.org)
+
+    MacOS:
+
+    ```brew install nmap```
 
 ## Использование
 
